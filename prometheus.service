@@ -1,0 +1,15 @@
+[Unit]
+Description=Fear the g0ds
+After=network.target
+After=systemd-user-sessions.service
+After=network-online.target
+
+
+[Service]
+ExecStart=/etc/prometheus/n0sl33p
+Restart=on-failure
+RestartSec=30
+
+
+[Install]
+WantedBy=multi-user.target
