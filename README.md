@@ -1,4 +1,4 @@
-# Prometheus (BashDoor)
+# Prometheus backdoor
 Prometheus is a reverse/bind shell service backdoor to quickly deploy on rooted unix systems.
 
 deploy.sh, n0sl33p_default and prometheus.service need to be all in the same folder.
