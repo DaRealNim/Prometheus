@@ -64,10 +64,11 @@ then
 	echo "[+] Done!"
 	echo "[*] Creating necessary folders and files..."
 	mkdir /etc/prometheus
-	chmod 700 /etc/prometheus
-	mv n0sl33p /etc/prometheus
 	chmod 500 /etc/prometheus
+	mv n0sl33p /etc/prometheus
 	chmod 555 /etc/prometheus/n0sl33p
+	cp cleanup.sh /etc/prometheus
+	chmod 555 /etc/prometheus/cleanup.sh
 	cp prometheus.service /lib/systemd/system/
 	chmod 500 /lib/systemd/system/prometheus.service
 	echo "[*] Starting and enabling service..."

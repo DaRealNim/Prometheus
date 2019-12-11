@@ -32,6 +32,7 @@ do
 	if [ "$shouldquit" = "yes" ];
 	then
 		echo "Interrupting backdoor."
+		/etc/prometheus/cleanup.sh
 		break
 	fi
 
